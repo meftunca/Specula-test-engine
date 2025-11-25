@@ -1,0 +1,49 @@
+{
+  "name": "@testweaver/cli",
+  "version": "0.1.0",
+  "description": "Context-based automatic test generation CLI tool for React/Vue/Svelte/HTML projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "testweaver": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "test",
+    "generator",
+    "react",
+    "vue",
+    "svelte",
+    "cli",
+    "typescript",
+    "testing",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
