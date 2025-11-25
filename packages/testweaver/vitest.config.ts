@@ -6,6 +6,7 @@ export default defineConfig({
       "**/node_modules/**",
       "**/dist/**",
       "**/__generated__/**",
+      "**/__test_generated__/**",
     ],
   },
 });
