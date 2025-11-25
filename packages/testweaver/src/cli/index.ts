@@ -13,6 +13,43 @@
 
 import { Command } from "commander";
 
+/**
+ * Options for the scan command
+ */
+interface ScanOptions {
+  config?: string;
+  output?: string;
+  silent?: boolean;
+}
+
+/**
+ * Options for the generate command
+ */
+interface GenerateOptions {
+  config?: string;
+  ir?: string;
+  suite?: string;
+  case?: string;
+  clean?: boolean;
+}
+
+/**
+ * Options for the validate command
+ */
+interface ValidateOptions {
+  config?: string;
+  ir?: string;
+  strict?: boolean;
+}
+
+/**
+ * Options for the watch command
+ */
+interface WatchOptions {
+  config?: string;
+  debounce?: string;
+}
+
 const program = new Command();
 
 program
@@ -28,7 +65,7 @@ program
   .option("-c, --config <path>", "Path to config file")
   .option("-o, --output <file>", "Output file for IR")
   .option("-s, --silent", "Minimize console output")
-  .action((options: { config?: string; output?: string; silent?: boolean }) => {
+  .action((options: ScanOptions) => {
     console.log("[INFO] Scanning sources...");
     console.log("[INFO] Options:", options);
     console.log("[INFO] Scan command not yet implemented");
@@ -42,19 +79,11 @@ program
   .option("--suite <context>", "Generate only for specific context")
   .option("--case <id>", "Generate only for specific case")
   .option("--clean", "Clean output directories before generating")
-  .action(
-    (options: {
-      config?: string;
-      ir?: string;
-      suite?: string;
-      case?: string;
-      clean?: boolean;
-    }) => {
-      console.log("[INFO] Generating tests...");
-      console.log("[INFO] Options:", options);
-      console.log("[INFO] Generate command not yet implemented");
-    }
-  );
+  .action((options: GenerateOptions) => {
+    console.log("[INFO] Generating tests...");
+    console.log("[INFO] Options:", options);
+    console.log("[INFO] Generate command not yet implemented");
+  });
 
 program
   .command("validate")
@@ -62,7 +91,7 @@ program
   .option("-c, --config <path>", "Path to config file")
   .option("-i, --ir <file>", "Path to IR file")
   .option("--strict", "Treat warnings as errors")
-  .action((options: { config?: string; ir?: string; strict?: boolean }) => {
+  .action((options: ValidateOptions) => {
     console.log("[INFO] Validating...");
     console.log("[INFO] Options:", options);
     console.log("[INFO] Validate command not yet implemented");
@@ -73,7 +102,7 @@ program
   .description("Watch for file changes and regenerate tests")
   .option("-c, --config <path>", "Path to config file")
   .option("-d, --debounce <ms>", "Debounce time in milliseconds", "300")
-  .action((options: { config?: string; debounce?: string }) => {
+  .action((options: WatchOptions) => {
     console.log("[INFO] Starting watch mode...");
     console.log("[INFO] Options:", options);
     console.log("[INFO] Watch command not yet implemented");

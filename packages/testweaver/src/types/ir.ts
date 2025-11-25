@@ -51,11 +51,24 @@ export interface SourceRef {
 
 /**
  * Supported UI frameworks
+ *
+ * - `react` - React with JSX/TSX files
+ * - `vue` - Vue.js with .vue single-file components
+ * - `svelte` - Svelte with .svelte files
+ * - `html` - Plain HTML files
  */
 export type Framework = "react" | "vue" | "svelte" | "html";
 
 /**
  * Supported languages/file types
+ *
+ * - `js` - JavaScript
+ * - `ts` - TypeScript
+ * - `tsx` - TypeScript with JSX
+ * - `jsx` - JavaScript with JSX
+ * - `html` - HTML markup
+ * - `svelte` - Svelte component files
+ * - `vue` - Vue single-file components
  */
 export type Language = "js" | "ts" | "tsx" | "jsx" | "html" | "svelte" | "vue";
 
