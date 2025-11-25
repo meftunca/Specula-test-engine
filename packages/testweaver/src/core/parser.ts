@@ -447,7 +447,11 @@ export function scanFile(filePath: string): TestSuite[] {
       // Build steps
       for (const parsedStep of steps) {
         if (testId === undefined) {
-          // Skip steps without a test ID (no selector)
+          // Warn about steps without a test ID (no selector)
+          console.warn(
+            `[TestWeaver] Warning: Step "${parsedStep.action}" at ${childLocation.filePath}:${childLocation.line} ` +
+            `is missing data-test-id. Steps require a selector to target elements.`
+          );
           continue;
         }
 

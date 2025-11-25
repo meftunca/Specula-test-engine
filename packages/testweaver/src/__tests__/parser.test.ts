@@ -7,18 +7,15 @@ import * as path from "node:path";
 import { scanFile } from "../core/parser.js";
 import type { TestSuite } from "../types/ir.js";
 
-// Path to the example Login.tsx component
-const loginComponentPath = path.resolve(
-  __dirname,
-  "../../../../example-app/src/components/Login.tsx"
-);
+// Path to the mock Login component for testing (relative to this test file)
+const mockLoginPath = path.resolve(__dirname, "./fixtures/MockLogin.tsx");
 
 describe("Parser", () => {
   describe("scanFile", () => {
     let suites: TestSuite[];
 
     beforeAll(() => {
-      suites = scanFile(loginComponentPath);
+      suites = scanFile(mockLoginPath);
     });
 
     it("should extract one TestSuite from Login.tsx", () => {
@@ -82,8 +79,9 @@ describe("Parser", () => {
         expect(steps[2]?.selector.value).toBe("submit");
       });
 
-      it("should extract expectations", () => {
-        expect(suites[0]?.cases[0]?.expectations.length).toBeGreaterThanOrEqual(2);
+      it("should extract 2 expectations", () => {
+        // MockLogin only has visible and text expectations for success-message
+        expect(suites[0]?.cases[0]?.expectations).toHaveLength(2);
       });
 
       it("should extract visible and text expectations from success-message", () => {
@@ -107,7 +105,7 @@ describe("Parser", () => {
       it("should include LocationRef in steps and expectations", () => {
         const step = suites[0]?.cases[0]?.steps[0];
         expect(step?.source).toBeDefined();
-        expect(step?.source?.filePath).toContain("Login.tsx");
+        expect(step?.source?.filePath).toContain("MockLogin.tsx");
         expect(step?.source?.line).toBeGreaterThan(0);
         expect(step?.source?.via).toBe("attribute");
       });
