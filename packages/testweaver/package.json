@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
+    "dev": "node --import tsx src/cli/index.ts generate",
+    "dev:watch": "tsc --watch",
     "lint": "eslint src --ext .ts",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -48,7 +49,9 @@
   "dependencies": {
     "@babel/parser": "^7.28.5",
     "@babel/traverse": "^7.28.5",
+    "chokidar": "^4.0.3",
     "commander": "^11.1.0",
+    "cosmiconfig": "^9.0.0",
     "glob": "^11.1.0"
   },
   "engines": {
