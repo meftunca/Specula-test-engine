@@ -1,0 +1,29 @@
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'docusaurus.config.js'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: cd docs && npm install
+      - name: Build
+        run: cd docs && npm run build
+      - name: Deploy to docs branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: docs
+          folder: docs/build
